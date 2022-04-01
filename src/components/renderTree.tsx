@@ -10,13 +10,12 @@ export interface Props {
 const RenderTree: React.FC<Props> = ({data}) => (
 	<>
 		{
-			data.map(({parent, children}) => (
-				<Fragment key={parent.id}>
+			data.map((props) => (
+				<>
 					<ListItem>
-						<EmployeeCard {...parent}></EmployeeCard>
-						{children.length && children.map(({parent}) => (<EmployeeCard key={parent.id} {...parent}></EmployeeCard>))}
+						<EmployeeCard {...props}></EmployeeCard>
 					</ListItem>
-				</Fragment>
+				</>
 			))
 		}
 	</>

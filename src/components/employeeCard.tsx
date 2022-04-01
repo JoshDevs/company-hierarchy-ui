@@ -1,10 +1,6 @@
 import React from 'react';
-import { Card, CardActionArea, CardContent, CardContentProps, Typography, Avatar, styled } from '@mui/material';
-import { EmployeeHierarchyType, EmployeeProps } from '../types/employee';
-
-export interface Props {
-    data: EmployeeHierarchyType[];
-}
+import { Card, CardActionArea, CardContent, CardContentProps, Typography, Avatar, styled, ListItem } from '@mui/material';
+import { EmployeeHierarchyType } from '../types/employee';
 
 const CustomCardContent = styled(CardContent)<CardContentProps>(() => ({
 	display: 'flex',
@@ -14,22 +10,31 @@ const CustomCardContent = styled(CardContent)<CardContentProps>(() => ({
 	justifyContent: 'center',
 }));
 
-const EmployeeCard: React.FC<EmployeeProps> = (props) => (
-	<Card key={props.id}>
-		<CardActionArea>
-			<CardContent>
-				<Avatar src={props.picture} alt={props.firstName} variant='rounded' sx={{width: 66, height: 66}}></Avatar>
-				<CustomCardContent>
-					<Typography variant='body1' component='div'>
-						{props.firstName} {props.lastName}
-					</Typography>
-					<Typography variant='h6' component={'div'}>
-						{props.role}
-					</Typography>
-				</CustomCardContent>
-			</CardContent>
-		</CardActionArea>
-	</Card>
+const EmployeeCard: React.FC<EmployeeHierarchyType> = (props) => (
+	<>
+		<ListItem>
+			<Card key={props.parent.id}>
+				<CardActionArea>
+					<CardContent>
+						<Avatar src={props.parent.picture} alt={props.parent.firstName} variant='rounded' sx={{ width: 66, height: 66 }}></Avatar>
+						<CustomCardContent>
+							<Typography variant='body1' component='div'>
+								{props.parent.firstName} {props.parent.lastName}
+							</Typography>
+							<Typography variant='h6' component={'div'}>
+								{props.parent.role}
+							</Typography>
+						</CustomCardContent>
+					</CardContent>
+				</CardActionArea>
+			</Card>
+		</ListItem>
+
+		{props.children && props.children.length && props.children.map((childProps) => (<div key={childProps.parent.id}>
+			<EmployeeCard key={childProps.parent.id} {...childProps}></EmployeeCard>
+		</div>
+		))}
+	</>
 );
 
 export default EmployeeCard;
