@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardActionArea, CardContent, CardContentProps, Typography, Avatar, styled, ListItem } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardContentProps, Typography, Avatar, styled } from '@mui/material';
 import { EmployeeHierarchyType } from '../types/employee';
 
 const CustomCardContent = styled(CardContent)<CardContentProps>(() => ({
@@ -12,7 +12,7 @@ const CustomCardContent = styled(CardContent)<CardContentProps>(() => ({
 
 const EmployeeCard: React.FC<EmployeeHierarchyType> = (props) => (
 	<>
-		<ListItem>
+		<div>
 			<Card key={props.parent.id}>
 				<CardActionArea>
 					<CardContent>
@@ -28,7 +28,7 @@ const EmployeeCard: React.FC<EmployeeHierarchyType> = (props) => (
 					</CardContent>
 				</CardActionArea>
 			</Card>
-		</ListItem>
+		</div>
 
 		{props.children && props.children.length && props.children.map((childProps) => (<div key={childProps.parent.id}>
 			<EmployeeCard key={childProps.parent.id} {...childProps}></EmployeeCard>

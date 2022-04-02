@@ -25,11 +25,10 @@ const theme = createTheme({
 		},
 		MuiGrid: {
 			styleOverrides: {
-				// root: {
-				// 	display: 'flex',
-				// 	justifyContent: 'center',
-				// 	alignItems: 'center'
-				// },
+				root: {
+					display: 'flex',
+					alignItems: 'center'
+				},
 				container: {
 					width: '90%',
 					margin: ['7%', 'auto']
